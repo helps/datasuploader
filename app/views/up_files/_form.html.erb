@@ -1,0 +1,12 @@
+<%= simple_form_for @up_file, :html => { :class => 'form-horizontal' } do |f| %>
+  <%= f.input :name %>
+  <%= f.input :fields_enclose %>
+  <%= f.input :fields_terminate %>
+  <%= f.input :lines_terminate %>
+  <%= f.input :table_name %>
+  <div class="form-actions">
+    <%= f.button :submit, :class => 'btn-primary' %>
+    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                up_files_path, :class => 'btn' %>
+  </div>
+<% end %>
