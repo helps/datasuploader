@@ -2,11 +2,9 @@ class UpFilesController < ApplicationController
   # GET /up_files
   # GET /up_files.json
 
+  before_filter :authenticate_admin!
   def index
-
-    
     @up_files = UpFile.all
-
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @up_files }

@@ -1,13 +1,6 @@
 Datasuploader::Application.routes.draw do
+  devise_for :admins
   resources :up_files
-
-
-  get "upload_file/up"
-
-  get "upload_file/result"
-
-  resources :uploadFiles
-
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

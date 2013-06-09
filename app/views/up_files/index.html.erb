@@ -1,23 +1,42 @@
-<h1>Listing up_files</h1>
-
-<table>
-  <tr>
-    <th>Name</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
-<% @up_files.each do |up_file| %>
-  <tr>
-    <td><%= up_file.name %></td>
-    <td><%= link_to 'Show', up_file %></td>
-    <td><%= link_to 'Edit', edit_up_file_path(up_file) %></td>
-    <td><%= link_to 'Destroy', up_file, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  </tr>
-<% end %>
+<%- model_class = UpFile -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.pluralize %></h1>
+</div>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th><%= model_class.human_attribute_name(:id) %></th>
+      <th><%= model_class.human_attribute_name(:name) %></th>
+      <th><%= model_class.human_attribute_name(:fields_enclose) %></th>
+      <th><%= model_class.human_attribute_name(:fields_terminate) %></th>
+      <th><%= model_class.human_attribute_name(:lines_terminate) %></th>
+      <th><%= model_class.human_attribute_name(:created_at) %></th>
+      <th><%=t '.actions', :default => t("helpers.actions") %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @up_files.each do |up_file| %>
+      <tr>
+        <td><%= link_to up_file.id, up_file_path(up_file) %></td>
+        <td><%= up_file.name %></td>
+        <td><%= up_file.fields_enclose %></td>
+        <td><%= up_file.fields_terminate %></td>
+        <td><%= up_file.lines_terminate %></td>
+        <td><%=l up_file.created_at %></td>
+        <td>
+          <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                      edit_up_file_path(up_file), :class => 'btn btn-mini' %>
+          <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+                      up_file_path(up_file),
+                      :method => :delete,
+                      :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+                      :class => 'btn btn-mini btn-danger' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
 </table>
 
-<br />
-
-<%= link_to 'New Up file', new_up_file_path %>
+<%= link_to t('.new', :default => t("helpers.links.new")),
+            new_up_file_path,
+            :class => 'btn btn-primary' %>

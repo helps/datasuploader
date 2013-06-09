@@ -11,29 +11,33 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130604071659) do
+ActiveRecord::Schema.define(:version => 20130609090131) do
 
-  create_table "temp", :force => true do |t|
-    t.string "userid"
-    t.string "password"
+  create_table "admins", :force => true do |t|
+    t.string   "email",                  :default => "", :null => false
+    t.string   "encrypted_password",     :default => "", :null => false
+    t.string   "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.integer  "sign_in_count",          :default => 0
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.string   "current_sign_in_ip"
+    t.string   "last_sign_in_ip"
+    t.datetime "created_at",                             :null => false
+    t.datetime "updated_at",                             :null => false
   end
 
-  add_index "temp", ["userid", "password"], :name => "index_temp_on_userid_and_password", :unique => true
+  add_index "admins", ["email"], :name => "index_admins_on_email", :unique => true
+  add_index "admins", ["reset_password_token"], :name => "index_admins_on_reset_password_token", :unique => true
 
   create_table "up_files", :force => true do |t|
     t.string   "name"
+    t.string   "fields_enclose"
+    t.string   "lines_terminate"
+    t.string   "fields_terminate"
     t.datetime "created_at",       :null => false
     t.datetime "updated_at",       :null => false
-    t.string   "fields_enclose"
-    t.string   "fields_terminate"
-    t.string   "lines_terminate"
-    t.string   "table_name"
-  end
-
-  create_table "upload_files", :force => true do |t|
-    t.string   "name"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
   end
 
 end
