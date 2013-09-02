@@ -45,7 +45,7 @@ class UpFilesController < ApplicationController
 
     respond_to do |format|
       if @up_file.save
-        command = "mysqlimport -u root -plendlove -f --local --columns=userid,password"
+        command = "nohup mysqlimport -u root -plendlove -f --local --columns=userid,password"
         if @up_file.fields_enclose?
           command += " --fields-enclosed-by=#{@up_file.fields_enclose}"
         end
@@ -56,7 +56,7 @@ class UpFilesController < ApplicationController
           command += " --lines-terminated-by=#{@up_file.lines_terminate?}"
         end
         command += " cf #{@up_file.name.path}"
-        p = `#{command}`
+        p = `#{command} &`
         format.html { redirect_to @up_file, notice: p}
 
         format.json { render json: @up_file, status: :created, location: @up_file }
