@@ -14,6 +14,8 @@ gem 'slim'
 gem 'thin'
 gem 'better_errors'
 
+gem 'delayed_job'
+
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
